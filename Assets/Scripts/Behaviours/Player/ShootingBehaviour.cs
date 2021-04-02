@@ -1,4 +1,5 @@
 using Starship.Controllers.Core;
+using Starship.Core;
 using UnityEngine;
 
 namespace Starship.Behaviours.Player
@@ -6,25 +7,30 @@ namespace Starship.Behaviours.Player
     public class ShootingBehaviour : MonoBehaviour
     {
         [SerializeField]
-        private GameObject Bullet;
-
-        [SerializeField] 
-        private Transform BulletsParent;
+        private InputManagement InputManager;
 
         [SerializeField]
-        private InputManagement InputManager;
+        private Transform GunPoint;
+
+        [SerializeField]
+        private float FireRate;
+        
+        private ObjectPool BulletPool { get; set; }
+        private float NextFire { get; set; }
         
         private void Start()
         {
             InputManager.OnShoot += OnShoot;
+            BulletPool = this.GetComponent<ObjectPool>();
         }
 
         private void OnShoot()
         {
-            Instantiate(Bullet,
-                new Vector3(Random.Range(-10, 10),
-                    Random.Range(-10, 10),
-                    Random.Range(-10, 10)), Quaternion.identity, BulletsParent);
+            if (Time.time > NextFire)
+            {
+                NextFire = FireRate + Time.time;
+                BulletPool.InstantiateObject(GunPoint.position);
+            }
         }
     }
 }

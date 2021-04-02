@@ -134,9 +134,10 @@ GameObject:
   - component: {fileID: 421522450}
   - component: {fileID: 421522451}
   - component: {fileID: 421522452}
+  - component: {fileID: 421522455}
+  - component: {fileID: 421522456}
   - component: {fileID: 421522453}
   - component: {fileID: 421522454}
-  - component: {fileID: 421522455}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -155,6 +156,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -10.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1167598977}
   - {fileID: 1615250188}
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -185,9 +187,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff1fa98059c3f64897d7e2527033842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 1664041728217570991, guid: 8562b00243d2d554fa4b5e9ddc9fa8f3, type: 3}
-  BulletsParent: {fileID: 1122522073}
   InputManager: {fileID: 431335206}
+  GunPoint: {fileID: 1167598977}
+  FireRate: 0.1
 --- !u!65 &421522453
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -232,6 +234,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 763911e9716627043a70e37ed9e28dbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &421522456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421522449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 545f63300bc30424ca5f74d3a153a275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ParentTransform: {fileID: 1122522073}
+  Prefab: {fileID: 1664041728217570991, guid: 8562b00243d2d554fa4b5e9ddc9fa8f3, type: 3}
+  PoolSize: 15
 --- !u!1 &431335205
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,6 +499,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1167598976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1167598977}
+  m_Layer: 0
+  m_Name: GunPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1167598977
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167598976}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.297}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 421522450}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1615250187
 PrefabInstance:

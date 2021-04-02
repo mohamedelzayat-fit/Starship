@@ -9,10 +9,16 @@ namespace Starship
     {
         [SerializeField]
         private float BulletSpeed;
-
-        private void Start()
+        
+        private void OnEnable()
         {
-            Destroy(this.gameObject, 2);
+            Invoke(nameof(DeactivateBullet), 0.5f);
+        }
+
+        private void DeactivateBullet()
+        {
+            this.gameObject.SetActive(false);
+            this.transform.position = Vector3.zero;
         }
 
         private void Update()
