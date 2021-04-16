@@ -1,4 +1,5 @@
 using Starship.Controllers.Core;
+using Starship.ScriptableObjects;
 using UnityEngine;
 
 namespace Starship.Controllers.Player
@@ -11,6 +12,9 @@ namespace Starship.Controllers.Player
         [SerializeField]
         [Range(0.1f, 100f)]
         private float Speed;
+
+        [SerializeField]
+        private GameMetrics Metrics;
 
         private StarshipAnimationController StarshipAnimator { get; set; }
         
@@ -34,6 +38,11 @@ namespace Starship.Controllers.Player
         {
             this.transform.position +=
                 new Vector3(horizontal * Speed * Time.deltaTime, 0, vertical * Speed * Time.deltaTime);
+
+            this.transform.position = new Vector3(
+                Mathf.Clamp(this.transform.position.x, Metrics.LimitLeft, Metrics.LimitRight),
+                0,
+                Mathf.Clamp(this.transform.position.z, Metrics.LimitDown, Metrics.LimitUp));
         }
     }
 }
