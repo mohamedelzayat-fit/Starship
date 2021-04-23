@@ -11,11 +11,15 @@ namespace Starship.Controllers.Core
         
         [SerializeField]
         private KeyCode EvadeKey;
+
+        [SerializeField]
+        private KeyCode PauseKey;
         
         public Action<float, float> OnInputChanged;
         public Action<float> OnEvade;
         public Action OnShoot;
-
+        public Action OnPause;
+        
         private void Update()
         {
             OnInputChanged?.Invoke(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -25,6 +29,9 @@ namespace Starship.Controllers.Core
             
             if(Input.GetKeyDown(EvadeKey))
                 OnEvade?.Invoke(Input.GetAxisRaw("Horizontal"));
+            
+            if(Input.GetKeyDown(PauseKey))
+                OnPause?.Invoke();
         }
     }
 }

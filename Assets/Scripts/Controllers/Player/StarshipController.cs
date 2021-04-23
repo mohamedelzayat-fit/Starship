@@ -1,10 +1,11 @@
 using Starship.Controllers.Core;
+using Starship.Core.Entities;
 using Starship.ScriptableObjects;
 using UnityEngine;
 
 namespace Starship.Controllers.Player
 {
-    public class StarshipController : MonoBehaviour
+    public class StarshipController : TrackedEntity
     {
         [SerializeField]
         private InputManagement InputManager;
@@ -24,18 +25,21 @@ namespace Starship.Controllers.Player
             InputManager.OnEvade += OnEvade;
             StarshipAnimator = this.GetComponent<StarshipAnimationController>();
         }
-
+        
         private void OnEvade(float horizontal)
         {
+            if (IsPaused) return;
+
             if(horizontal > 0)
                 StarshipAnimator.TriggerBarrelRollLeft();
             else
                 StarshipAnimator.TriggerBarrelRollRight();
-
         }
 
         private void OnInputChanged(float horizontal, float vertical)
         {
+            if (IsPaused) return;
+            
             this.transform.position +=
                 new Vector3(horizontal * Speed * Time.deltaTime, 0, vertical * Speed * Time.deltaTime);
 
