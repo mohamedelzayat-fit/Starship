@@ -1,14 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Starship.Core.Entities;
+using Starship.ScriptableObjects;
 using UnityEngine;
 
 namespace Starship
 {
     public class BulletController : MonoBehaviour
     {
-        [SerializeField]
-        private float BulletSpeed;
+        [SerializeField] 
+        private Projectile ProjectileAttribute;
         
         private void OnEnable()
         {
@@ -23,7 +25,12 @@ namespace Starship
 
         private void Update()
         {
-            this.transform.position += new Vector3(0, 0, 10) * BulletSpeed * Time.deltaTime;
+            this.transform.position += new Vector3(0, 0, 10) * ProjectileAttribute.TravelingSpeed * Time.deltaTime;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            ProjectileAttribute.ApplyEffect(other.GetComponent<TrackedEntity>());
         }
     }
 }

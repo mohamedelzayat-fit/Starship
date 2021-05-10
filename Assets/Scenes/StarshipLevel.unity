@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InputManager: {fileID: 431335206}
-  Speed: 25
+  ShipAttribute: {fileID: 11400000, guid: 7c740ddf07e9ad84e8ef6aef17afcee0, type: 2}
   Metrics: {fileID: 11400000, guid: b9a5f46ceb2636443a09b716833e804f, type: 2}
 --- !u!114 &421522452
 MonoBehaviour:
@@ -190,7 +190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InputManager: {fileID: 431335206}
   GunPoint: {fileID: 1167598977}
-  FireRate: 0.1
+  ShipAttribute: {fileID: 11400000, guid: 7c740ddf07e9ad84e8ef6aef17afcee0, type: 2}
 --- !u!65 &421522453
 BoxCollider:
   m_ObjectHideFlags: 0

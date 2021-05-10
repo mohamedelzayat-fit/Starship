@@ -1,4 +1,5 @@
 using Starship.Core.Entities;
+using Starship.Managers;
 using Starship.ScriptableObjects;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -19,11 +20,18 @@ namespace Starship.Core.Generators
         private ObjectPool EnemiesPool { get; set; }
 
         private float NextEnemy { get; set; } = 0;
-        
+
+        private GameManager GameManagment;
         
         private void Start()
         {
             EnemiesPool = this.GetComponent<ObjectPool>();
+            GameManagment = this.GetComponent<GameManager>();
+
+            for (int i = 0; i < EnemiesPool.Prefabs.Count; i++)
+            {
+                GameManagment.AddTrackedEntity(EnemiesPool.Prefabs[i].GetComponent<TrackedEntity>());
+            }
         }
 
         private void Update()

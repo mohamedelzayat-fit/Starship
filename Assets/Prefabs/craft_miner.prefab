@@ -127,8 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb2ccd1e85d652140adb8fdee7b7bf7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TravelingDirection: {x: 0, y: 0, z: -1}
-  Speed: 10
+  ShipAttribute: {fileID: 11400000, guid: 66ca99575a624364fb82cd59ebce5d70, type: 2}
 --- !u!54 &6379017235573875921
 Rigidbody:
   m_ObjectHideFlags: 0

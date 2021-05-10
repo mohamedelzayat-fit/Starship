@@ -1,19 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Starship.Core;
 using Starship.Core.Entities;
+using Starship.ScriptableObjects;
 using UnityEngine;
 
 namespace Starship.Controllers.Enemies
 {
     public class EnemyController : TrackedEntity
     {
-        [SerializeField]
-        private Vector3 TravelingDirection;
+        [SerializeField] 
+        private DirectedShipAttribute ShipAttribute;
 
-        [SerializeField]
-        private float Speed;
-        
         private void OnEnable()
         {
             Invoke(nameof(DeactivateShip), 5f);
@@ -23,21 +22,17 @@ namespace Starship.Controllers.Enemies
         {
             this.gameObject.SetActive(false);
             this.transform.position = Vector3.zero;
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Bullet"))
-            {
-                DeactivateShip();
-            }
+            this.Health = 100;
         }
 
         private void Update()
         {
             if (this.IsPaused) return;
             
-            this.transform.position += TravelingDirection * Speed * Time.deltaTime;
+            this.transform.position += ShipAttribute.TravelingDirection * ShipAttribute.ShipSpeed * Time.deltaTime;
+
+            if (this.Health <= 0)
+                DeactivateShip();
         }
     }
 }

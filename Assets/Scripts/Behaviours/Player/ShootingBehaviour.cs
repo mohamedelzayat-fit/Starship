@@ -1,5 +1,6 @@
 using Starship.Controllers.Core;
 using Starship.Core;
+using Starship.ScriptableObjects;
 using UnityEngine;
 
 namespace Starship.Behaviours.Player
@@ -13,7 +14,7 @@ namespace Starship.Behaviours.Player
         private Transform GunPoint;
 
         [SerializeField]
-        private float FireRate;
+        private ShipAttribute ShipAttribute;
         
         private ObjectPool BulletPool { get; set; }
         private float NextFire { get; set; }
@@ -28,7 +29,7 @@ namespace Starship.Behaviours.Player
         {
             if (Time.time > NextFire)
             {
-                NextFire = FireRate + Time.time;
+                NextFire = ShipAttribute.FireRate + Time.time;
                 BulletPool.InstantiateObject(GunPoint.position);
             }
         }

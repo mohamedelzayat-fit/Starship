@@ -11,8 +11,7 @@ namespace Starship.Controllers.Player
         private InputManagement InputManager;
         
         [SerializeField]
-        [Range(0.1f, 100f)]
-        private float Speed;
+        private ShipAttribute ShipAttribute;
 
         [SerializeField]
         private GameMetrics Metrics;
@@ -41,7 +40,7 @@ namespace Starship.Controllers.Player
             if (IsPaused) return;
             
             this.transform.position +=
-                new Vector3(horizontal * Speed * Time.deltaTime, 0, vertical * Speed * Time.deltaTime);
+                new Vector3(horizontal * ShipAttribute.ShipSpeed * Time.deltaTime, 0, vertical * ShipAttribute.ShipSpeed * Time.deltaTime);
 
             this.transform.position = new Vector3(
                 Mathf.Clamp(this.transform.position.x, Metrics.LimitLeft, Metrics.LimitRight),

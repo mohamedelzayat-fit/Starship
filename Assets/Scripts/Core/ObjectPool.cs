@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Starship.Core.Entities;
 using UnityEngine;
 
 namespace Starship.Core
@@ -14,11 +15,11 @@ namespace Starship.Core
         [SerializeField]
         private int PoolSize;
 
-        private List<GameObject> Prefabs { get; set; }
+        public List<GameObject> Prefabs { get; set; }
         
         private int Index { get; set; } = 0;
         
-        private void Start()
+        private void Awake()
         {
             Prefabs = new List<GameObject>();
             for (int i = 0; i < PoolSize; i++)
