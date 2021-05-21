@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da26e322fc7cfe1439b2ffcd11c10035, type: 3}
+  m_Name: EnemyGenerator
+  m_EditorClassIdentifier: 
+  GeneratorSettings:
+  - {fileID: 11400000, guid: d405c906c1600eb4e8edeb2c986ba56d, type: 2}
+  - {fileID: 11400000, guid: c9f399e9b4a69fd48aa6f1fc81eaf2ff, type: 2}
+  GenerationRate: 0.5
+  Metrics: {fileID: 11400000, guid: b9a5f46ceb2636443a09b716833e804f, type: 2}
+  InstantiationOffset: {x: 0, y: 0, z: 2}

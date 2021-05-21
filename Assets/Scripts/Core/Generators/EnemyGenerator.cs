@@ -1,6 +1,7 @@
 using Starship.Core.Entities;
 using Starship.Managers;
 using Starship.ScriptableObjects;
+using Starship.ScriptableObjects.Generators;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,13 +10,7 @@ namespace Starship.Core.Generators
     public class EnemyGenerator : TrackedEntity
     {
         [SerializeField]
-        private float GenerationSpeed;
-
-        [SerializeField]
-        private GameMetrics GameBoundaries;
-
-        [SerializeField]
-        private float TopOffset;
+        private Generator Generator;
         
         private ObjectPool EnemiesPool { get; set; }
 
@@ -27,7 +22,7 @@ namespace Starship.Core.Generators
         {
             EnemiesPool = this.GetComponent<ObjectPool>();
             GameManagment = this.GetComponent<GameManager>();
-
+            
             for (int i = 0; i < EnemiesPool.Prefabs.Count; i++)
             {
                 GameManagment.AddTrackedEntity(EnemiesPool.Prefabs[i].GetComponent<TrackedEntity>());
@@ -38,12 +33,12 @@ namespace Starship.Core.Generators
         {
             if (Time.time > NextEnemy)
             {
-                NextEnemy = Time.time + GenerationSpeed;
+                NextEnemy = Time.time + Generator.GenerationRate;
                 EnemiesPool.InstantiateObject(
                     new Vector3(
-                        Random.Range(GameBoundaries.LimitLeft, GameBoundaries.LimitRight), 
+                        Random.Range(Generator.Metrics.LimitLeft, Generator.Metrics.LimitRight), 
                         0, 
-                        GameBoundaries.LimitUp + TopOffset));
+                        Generator.Metrics.LimitUp) + Generator.InstantiationOffset);
             }
         }
     }
