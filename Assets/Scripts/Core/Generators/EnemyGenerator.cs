@@ -7,39 +7,56 @@ using Random = UnityEngine.Random;
 
 namespace Starship.Core.Generators
 {
-    public class EnemyGenerator : TrackedEntity
+    public class EnemyGenerator : TrackedEntity // Generator Processor
     {
-        [SerializeField]
-        private Generator Generator;
+        // [SerializeField]
+        // private Generator Generator;
         
         private ObjectPool EnemiesPool { get; set; }
 
-        private float NextEnemy { get; set; } = 0;
+        private float TimeForNextEnemy { get; set; } = 0;
 
         private GameManager GameManagment;
+
+        private WaveProcessor WProcessor { get; set; }
         
+        private Wave CurrentWave { get; set; }
+
         private void Start()
         {
-            EnemiesPool = this.GetComponent<ObjectPool>();
+            WProcessor = this.GetComponent<WaveProcessor>();
+            WProcessor.OnWaveChanged += WProcessorOnOnWaveChanged;
             GameManagment = this.GetComponent<GameManager>();
-            
-            for (int i = 0; i < EnemiesPool.Prefabs.Count; i++)
-            {
-                GameManagment.AddTrackedEntity(EnemiesPool.Prefabs[i].GetComponent<TrackedEntity>());
-            }
         }
 
+        private void WProcessorOnOnWaveChanged(Wave wave)
+        {
+            CurrentWave = wave;
+        }
+
+        private void GenerateObject()
+        {
+            if(ReferenceEquals(CurrentWave?.Generator, null)) return;
+            
+            if (!(Time.time > CurrentWave.Generator.GenerationRate)) return;
+            
+            var NextEnemy = CurrentWave.Generator.GetNextItem();
+
+            if (ReferenceEquals(NextEnemy, null)) return;
+            
+            TimeForNextEnemy = Time.time + CurrentWave.Generator.GenerationRate;
+            var GeneratedEnemy = Instantiate(NextEnemy);
+            GeneratedEnemy.transform.position =  new Vector3(
+                Random.Range(CurrentWave.Generator.Metrics.LimitLeft, CurrentWave.Generator.Metrics.LimitRight), 
+                0, 
+                CurrentWave.Generator.Metrics.LimitUp) + CurrentWave.Generator.InstantiationOffset;
+
+            GameManagment.AddTrackedEntity(GeneratedEnemy.GetComponent<TrackedEntity>());
+        }
+        
         private void Update()
         {
-            if (Time.time > NextEnemy)
-            {
-                NextEnemy = Time.time + Generator.GenerationRate;
-                EnemiesPool.InstantiateObject(
-                    new Vector3(
-                        Random.Range(Generator.Metrics.LimitLeft, Generator.Metrics.LimitRight), 
-                        0, 
-                        Generator.Metrics.LimitUp) + Generator.InstantiationOffset);
-            }
+            GenerateObject();
         }
     }
 }

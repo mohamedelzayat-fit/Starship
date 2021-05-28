@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: First wave
   Generator: {fileID: 11400000, guid: 3c4a42ceafdbe5947b51e89b54a6aecf, type: 2}
-  Duration: 60
+  Duration: 10

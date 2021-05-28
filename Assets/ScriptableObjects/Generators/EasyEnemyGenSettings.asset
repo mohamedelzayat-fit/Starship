@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ObjectToGenerate: {fileID: 4442946096729187368, guid: d76e8b437a0025f4f8dc100be0d6c9b7,
     type: 3}
-  NumberOfOccurrences: 20
+  NumberOfOccurrences: 100

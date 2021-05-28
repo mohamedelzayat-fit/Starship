@@ -1,3 +1,4 @@
+using System;
 using Starship.Controllers.Core;
 using Starship.Core.Entities;
 using Starship.ScriptableObjects;
@@ -23,6 +24,7 @@ namespace Starship.Controllers.Player
             InputManager.OnInputChanged += OnInputChanged;
             InputManager.OnEvade += OnEvade;
             StarshipAnimator = this.GetComponent<StarshipAnimationController>();
+            this.Health = 100;
         }
         
         private void OnEvade(float horizontal)
@@ -46,6 +48,16 @@ namespace Starship.Controllers.Player
                 Mathf.Clamp(this.transform.position.x, Metrics.LimitLeft, Metrics.LimitRight),
                 0,
                 Mathf.Clamp(this.transform.position.z, Metrics.LimitDown, Metrics.LimitUp));
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            other.GetComponent<TrackedEntity>().Health = 0;
+            this.Health -= 50;
+            
+            Debug.Log("Registering collision " + other.name);
+            if(Health <= 0)
+                this.gameObject.SetActive(false);
         }
     }
 }

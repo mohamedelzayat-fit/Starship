@@ -20,9 +20,11 @@ namespace Starship.Controllers.Enemies
 
         private void DeactivateShip()
         {
-            this.gameObject.SetActive(false);
-            this.transform.position = Vector3.zero;
-            this.Health = 100;
+            // this.gameObject.SetActive(false);
+            // this.transform.position = Vector3.zero;
+            // this.Health = 100;
+            
+            Destroy(this.gameObject);
         }
 
         private void Update()

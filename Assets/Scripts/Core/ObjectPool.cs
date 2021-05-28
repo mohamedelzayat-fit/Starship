@@ -7,7 +7,7 @@ namespace Starship.Core
     public class ObjectPool : MonoBehaviour
     {
         [SerializeField]
-        private Transform ParentTransform;
+        public Transform ParentTransform;
 
         [SerializeField]
         private GameObject Prefab;
